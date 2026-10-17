@@ -169,30 +169,6 @@
     ];
     const ADDRESS_FIELDS = ["street", "suite", "city"];
 
-    // Dữ liệu người Việt dùng để thay cho tên tiếng Anh từ API
-    const VIET_USERS = [
-      { name: "Nguyễn Văn An", username: "annv", email: "an.nguyen@gmail.com", phone: "0901 234 567",
-        address: { street: "12 Lê Lợi", suite: "Phường Bến Nghé", city: "TP. Hồ Chí Minh" } },
-      { name: "Trần Thị Bình", username: "binhtt", email: "binh.tran@gmail.com", phone: "0912 345 678",
-        address: { street: "45 Hàng Bài", suite: "Phường Tràng Tiền", city: "Hà Nội" } },
-      { name: "Lê Hoàng Cường", username: "cuonglh", email: "cuong.le@gmail.com", phone: "0923 456 789",
-        address: { street: "78 Bạch Đằng", suite: "Phường Hải Châu 1", city: "Đà Nẵng" } },
-      { name: "Phạm Thị Dung", username: "dungpt", email: "dung.pham@gmail.com", phone: "0934 567 890",
-        address: { street: "23 Trần Phú", suite: "Phường Lộc Thọ", city: "Nha Trang" } },
-      { name: "Hoàng Minh Đức", username: "duchm", email: "duc.hoang@gmail.com", phone: "0945 678 901",
-        address: { street: "56 Lê Duẩn", suite: "Phường Phú Nhuận", city: "Huế" } },
-      { name: "Vũ Thị Hoa", username: "hoavt", email: "hoa.vu@gmail.com", phone: "0956 789 012",
-        address: { street: "89 Lạch Tray", suite: "Phường Đằng Giang", city: "Hải Phòng" } },
-      { name: "Đặng Quốc Huy", username: "huydq", email: "huy.dang@gmail.com", phone: "0967 890 123",
-        address: { street: "34 Hòa Bình", suite: "Phường An Cư", city: "Cần Thơ" } },
-      { name: "Bùi Thị Lan", username: "lanbt", email: "lan.bui@gmail.com", phone: "0978 901 234",
-        address: { street: "67 Phù Đổng Thiên Vương", suite: "Phường 8", city: "Đà Lạt" } },
-      { name: "Đỗ Văn Minh", username: "minhdv", email: "minh.do@gmail.com", phone: "0989 012 345",
-        address: { street: "90 Quang Trung", suite: "Phường Quang Trung", city: "Quy Nhơn" } },
-      { name: "Ngô Thị Ngọc", username: "ngocnt", email: "ngoc.ngo@gmail.com", phone: "0990 123 456",
-        address: { street: "15 Nguyễn Văn Cừ", suite: "Phường Hưng Bình", city: "Vinh" } },
-    ];
-
     const emptyUser = () => ({
       name: "", username: "", email: "",
       address: { street: "", suite: "", city: "" },
@@ -278,16 +254,7 @@
       React.useEffect(() => {
         fetch("https://jsonplaceholder.typicode.com/users")
           .then((res) => res.json())
-          .then((data) => {
-            // Thay dữ liệu API bằng thông tin người Việt (giữ id, website)
-            const viUsers = data.map((u, i) =>
-              VIET_USERS[i]
-                ? { ...u, ...VIET_USERS[i], address: { ...VIET_USERS[i].address } }
-                : u
-            );
-            setUsers(viUsers);
-            setLoading(false);
-          })
+          .then((data) => { setUsers(data); setLoading(false); })
           .catch(() => setLoading(false));
       }, []);
 
